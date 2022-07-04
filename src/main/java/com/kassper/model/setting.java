@@ -57,6 +57,10 @@ public class setting {
         }
     }
 
-
-
+    public static void dellSetting (String id, String name, String identity){
+        if (id !=null && name !=null){
+            String qwery = "Delete from \"JournalDB\".\""+identity+"\" where id_"+identity+"="+id+" and name"+identity+"\"='"+name+"'";
+            bd.executeUppMethod(qwery);
+        }
+    }
 }

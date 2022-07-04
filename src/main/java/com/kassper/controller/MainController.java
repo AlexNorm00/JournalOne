@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @Controller
+@RequestMapping
 public class MainController {
 
     private static String text;
@@ -17,13 +18,14 @@ public class MainController {
     private static int status;
 
     @GetMapping("/Password")
-    public String seyInPass(Model model) {
+    public String seyInPassGet(Model model) {
         text = "Enter your username and password to authenticate the user.                 ";
         model.addAttribute("textic", text);
         return "Password";}
 
+
     @PostMapping("/Start")
-    public String seyInStart(@RequestParam("uname") String login, @RequestParam("psw") String password, Model model) {
+    public String seyInStartPost(@RequestParam("uname") String login, @RequestParam("psw") String password, Model model) {
         try {
             person.passLog(login,password);
             String FIO=person.getSurname()+" "+person.getName()+" "+person.getMiddleName();
@@ -47,19 +49,22 @@ public class MainController {
     }
 
     @GetMapping("/Person")
-    public String seyInPersonGet (Model model){
+    public String seyInPersonPost(Model model){
         model.addAttribute("options",setting.allPosition("status"));
         return "PersonView";
     }
 
-    @PostMapping("/Setting")
-    public String seyInSettingGet( Model model){
+    @GetMapping("/Setting")
+    public String seyInSettingPost(Model model){
         model.addAttribute("m",setting.allPosition("predmet"));
         model.addAttribute("n", setting.allPosition("status"));
         return "SettingsView";}
 
-
-
+/*    @GetMapping("/Setting")
+    public String seyInSettingGet(Model model){
+        model.addAttribute("m",setting.allPosition("predmet"));
+        model.addAttribute("n", setting.allPosition("status"));
+        return "SettingsView";}*/
 
 
 
@@ -72,22 +77,26 @@ public class MainController {
                               @RequestParam("dataYers") Date dataYers,
                               @RequestParam("status") String status){
         person.addPerson(surname,name,middlename,loginPers,passPerson,dataYers,status.toString());
-        return "PersonView";}
+        return "Start";}
 
 
-
-
-   // @GetMapping("/Setting")
-    @GetMapping(value = "/Setting/s")
-    public String seyAddSettingStatus (@RequestParam ("statusID") String idStatus, @RequestParam ("statusName") String nameStatus, Model model){
-        setting.addSeiing(idStatus, nameStatus, "status");
-        //seyInSettingGet(model);
-        return "SettingsView";
-    }
-   // @GetMapping("/Setting")
-    @GetMapping(value = "/Setting/c")
-    public  String seyAddSettingClass (@RequestParam ("classID") String idClass, @RequestParam ("className") String nameClass,Model model){
+/*    // @GetMapping("/Setting")
+    @PostMapping(value = "/Setting)
+    public String seyAddSettingClass (@RequestParam ("classID") String idClass, @RequestParam ("className") String nameClass){;
         setting.addSeiing(idClass, nameClass, "predmet");
         return "SettingsView";
+    }*/
+
+   // @GetMapping("/Setting")
+    @PostMapping(value = "/Setting")
+    public String seyAddSettingStatus (@RequestParam ("ID") String id, @RequestParam ("Name") String name, @RequestParam ("but") String button){
+        String settingParsms = button == "add2"? "status" : button == "add1" ? "predmet " : null;
+        if (settingParsms==null) {
+            settingParsms = button=="dell2" ? "status" : "predmet";
+            setting.dellSetting(id,name,settingParsms);
+        }
+        else setting.addSeiing(id, name, settingParsms);
+        return "SettingsView";
     }
+
 }

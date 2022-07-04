@@ -91,20 +91,20 @@ position: absolute;
 </head>
 <body>
     <div class="container" >
-        <form method="get" action="Setting/c">
+        <form method="post" action="Setting">
             <label><h3>Add class name</h3></label>
-            <input type="number" placeholder="Enter class id" name="classID" maxlength ="2">
-            <input type="text" placeholder="Enter class name" name="className"maxlength ="20">
-            <button type="submit" value="class">Add</button>
-            <button type="submit" name="deleteClass">Delete</button>
+            <input type="number" placeholder="Enter class id" name="ID" maxlength ="2">
+            <input type="text" placeholder="Enter class name" name="Name"maxlength ="20">
+            <button type="submit" value="add1" name="but">Add class</button>
+            <button type="submit" value="dell2" name="but">Delete</button>
         </form>
 
-        <form method="get" action="Setting/s">
+        <form method="post" action="Setting" >
             <label><h3>Add status</h3></label>
-            <input type="number" placeholder="Enter status id" name="statusID" maxlength ="2">
-            <input type="text" placeholder="Enter status name" name="statusName"maxlength ="40">
-            <button type="submit" value="status">Add</button>
-            <button type="submit" name="deleteStatus">Delete</button>
+            <input type="number" placeholder="Enter status id" name="ID" maxlength ="2">
+            <input type="text" placeholder="Enter status name" name="Name"maxlength ="40">
+            <button type="submit" value="add2" name="but">Add status</button>
+            <button type="submit" value="dell2" name="but">Delete</button>
         </form>
     </div>
 
