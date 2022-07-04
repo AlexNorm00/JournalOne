@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PersonAdd</title>
+    <style type="text/css">
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: auto;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+select[size="1"],
+input[type=date]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: auto;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+
+/* Set a style for all buttons */
+button {
+    background-color: #663399;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+.container {
+    position: absolute;
+    top:10%;
+    left:35%;
+    right:35%;
+    padding: 16px;
+}
+.containerleft {
+    position: absolute;
+    top:85%;
+    right:50%;
+    padding: 16px;
+}
+.containerright {
+    position: absolute;
+    top:85%;
+    left:50%;
+    padding: 16px;
+}
+.containerPass {
+    position: absolute;
+    right:3,5%;
+    left:4%;
+    top:121%;
+    wight: 100%
+    padding: 16px;
+}
+/* The "Forgot password" text */
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+
+}
+    </style>
+</head>
+<body>
+<form method="post" action="Person">
+<div class="container">
+    <div>
+        <label><b>Surname</b></label>
+        <input type="text" placeholder="Enter surname" name="surname" required>
+        <label><b>Name</b></label>
+        <input type="text" placeholder="Enter name" name="name" required>
+        <label><b>Middle name</b></label>
+        <input type="text" placeholder="Enter middle name" name="middlename" required>
+
+        <div class="containerPass">
+            <label><b>Login</b></label>
+            <input type="text" placeholder="Enter login/uname" name="login" required>
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+            <button type="submit">Save</button>
+        </div>
+
+        <div class="containerleft">
+        <label><b>Date berthday</b></label>
+        <input type="date" placeholder="dd.mm.yyyy" name="dataYers" required>
+        </div>
+        <div class="containerright">
+        <label><b>Classsification</b></label>
+        <select size="1"  name="status" required="true" >
+            <option selected>Choose a classsification</option>
+            <div th:utext = "${options}"/>
+            <option value = "1" th:int="1">1</option>
+            <option value = "2" th:int="1">2</option>
+            <option value = "3"th:int="1">3</option>
+            <option value = "4"th:int="1">4</option>
+            <option value = "5"th:int="1">5</option>
+        </select>
+        </div>
+
+    </div>
+
+</div>
+    <a th:text = "${a}"/>
+</form>
+</body>
+</html>

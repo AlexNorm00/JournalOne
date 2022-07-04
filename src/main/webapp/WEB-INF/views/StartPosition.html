@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html  xmlns:th = "http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start</title>
+    <style type="text/css">
+body{
+background-image: url(images\Wall.jpg) no-repeat;
+background-size: 100%;
+}
+
+button {
+    background-color: #663399;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Add padding to containers */
+.container1 {
+    position: absolute;
+    top:30%;
+    left:10%;
+    right:55%;
+    padding: 16px;
+}
+.container2 {
+    position: absolute;
+    top:40%;
+    left:10%;
+    right:55%;
+    padding: 16px;
+}
+.container3 {
+    position: absolute;
+    top:50%;
+    left:10%;
+    right:55%;
+    padding: 16px;
+}
+.container4 {
+    position: absolute;
+    top:60%;
+    left:10%;
+    right:55%;
+    padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+}
+.nameperson{
+wight:100%;
+top:1%;
+left = 80%;
+}
+    </style>
+</head>
+<body>
+<form method="get" action="Journal">
+    <div class="container1">
+        <button type="submit">Journal</button>
+    </div>
+</form>
+<form method="Post" action="Person">
+    <div class="container2">
+        <button type="submit" >Create person</button>
+    </div>
+</form>
+<form method="Post" action="Setting">
+    <div class="container3">
+        <button type="submit">Settings</button>
+    </div>
+</form>
+<form method="get" action="Exit">
+    <div class="container4">
+        <button type="submit">Exit</button>
+    </div>
+</form>
+</body>
+</html>
