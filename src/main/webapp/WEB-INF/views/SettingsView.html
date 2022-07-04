@@ -91,7 +91,7 @@ position: absolute;
 </head>
 <body>
     <div class="container" >
-        <form method="post" action="Setting/classSave">
+        <form method="get" action="Setting/c">
             <label><h3>Add class name</h3></label>
             <input type="number" placeholder="Enter class id" name="classID" maxlength ="2">
             <input type="text" placeholder="Enter class name" name="className"maxlength ="20">
@@ -99,7 +99,7 @@ position: absolute;
             <button type="submit" name="deleteClass">Delete</button>
         </form>
 
-        <form method="Post" action="Setting/statusSave">
+        <form method="get" action="Setting/s">
             <label><h3>Add status</h3></label>
             <input type="number" placeholder="Enter status id" name="statusID" maxlength ="2">
             <input type="text" placeholder="Enter status name" name="statusName"maxlength ="40">

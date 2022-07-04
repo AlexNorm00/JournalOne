@@ -5,9 +5,7 @@ import com.kassper.model.person;
 import com.kassper.model.setting;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -23,9 +21,6 @@ public class MainController {
         text = "Enter your username and password to authenticate the user.                 ";
         model.addAttribute("textic", text);
         return "Password";}
-
-    @GetMapping("/Start")
-    public String seyInStartGet(){return "StartPosition";}
 
     @PostMapping("/Start")
     public String seyInStart(@RequestParam("uname") String login, @RequestParam("psw") String password, Model model) {
@@ -57,6 +52,17 @@ public class MainController {
         return "PersonView";
     }
 
+    @PostMapping("/Setting")
+    public String seyInSettingGet( Model model){
+        model.addAttribute("m",setting.allPosition("predmet"));
+        model.addAttribute("n", setting.allPosition("status"));
+        return "SettingsView";}
+
+
+
+
+
+
     @PostMapping("/Person")
     public String seyInPerson(@RequestParam("surname") String surname,
                               @RequestParam("name") String name,
@@ -68,24 +74,20 @@ public class MainController {
         person.addPerson(surname,name,middlename,loginPers,passPerson,dataYers,status.toString());
         return "PersonView";}
 
-    @GetMapping("/Setting")
-    public String seyInSettingGet(){
-        return "SettingView";}
 
-    @PostMapping("/Setting")
-    public String seyInSettingPost(Model model){
-        model.addAttribute("m",setting.allPosition("predmet"));
-        model.addAttribute("n", setting.allPosition("status"));
-        return "SettingsView";}
 
-    @PostMapping(value = "/Setting/statusSave")
+
+   // @GetMapping("/Setting")
+    @GetMapping(value = "/Setting/s")
     public String seyAddSettingStatus (@RequestParam ("statusID") String idStatus, @RequestParam ("statusName") String nameStatus, Model model){
         setting.addSeiing(idStatus, nameStatus, "status");
+        //seyInSettingGet(model);
         return "SettingsView";
     }
-    @PostMapping("/Setting/classSave")
-    public void seyAddSettingClass (@RequestParam ("classID") String idClass, @RequestParam ("className") String nameClass,Model model){
+   // @GetMapping("/Setting")
+    @GetMapping(value = "/Setting/c")
+    public  String seyAddSettingClass (@RequestParam ("classID") String idClass, @RequestParam ("className") String nameClass,Model model){
         setting.addSeiing(idClass, nameClass, "predmet");
-        seyInSettingGet();
+        return "SettingsView";
     }
 }

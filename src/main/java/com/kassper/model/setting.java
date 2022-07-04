@@ -29,8 +29,6 @@ public class setting {
                 onePosition();
                 text += "<tr><th><a>"+id+"<a/></th><th><a>"+name+"<a/></th></tr>";
             }
-            rs.close();
-            rs = null;
         }
         catch (SQLException e){
             System.out.println(e);
@@ -52,8 +50,6 @@ public class setting {
                 {
                     System.out.println("Запись существует");
                 }
-                rs.close();
-                rs = null;
             }
             catch (SQLException e){
                 System.out.println(e);
