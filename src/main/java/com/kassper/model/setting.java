@@ -28,13 +28,29 @@ public class setting {
             while (rs.next()) {
                 onePosition();
                 text += "<tr><th><a>"+id+"<a/></th><th><a>"+name+"<a/></th></tr>";
-                bd.allClosed();
             }
         }
         catch (SQLException e){
             System.out.println(e);
         }
+        return text;
+    }
 
+    public static String allPositionOnPersonView (String identity){
+        String query = "select * from \"JournalDB\".\""+identity+"\"";
+        rs = bd.conResoultSet(query);
+        String text="";
+        try {
+            int i=0;
+            while (rs.next()) {
+                onePosition();
+                text += "<option value = \""+i+"\" name=\"options\">"+name+"</option>";
+                i++;
+            }
+        }
+        catch (SQLException e){
+            System.out.println(e);
+        }
         return text;
     }
 

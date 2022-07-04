@@ -111,16 +111,13 @@ span.psw {
         </div>
         <div class="containerright">
         <label><b>Classsification</b></label>
-        <select size="1"  name="status" required="true" >
-            <option selected>Choose a classsification</option>
-            <!--<div th:utext = "${options}"/>-->
+        <select size="1"  required="true" >
+            <option selected>Choose a classification</option>
+            <div th:utext = "${options}"/>
         </select>
         </div>
-
     </div>
-
 </div>
-    <a th:text = "${a}"/>
 </form>
 </body>
 </html>

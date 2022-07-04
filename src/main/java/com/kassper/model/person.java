@@ -44,19 +44,6 @@ public class person {
         }
     }
 
-    public static Array allPersons() {
-        String query = "select * from \"JournalDB\".\"person\"";
-        rs = bd.conResoultSet(query);
-        Array massPerson = null;
-        try {
-            massPerson = rs.getArray("id_person");}
-        catch (SQLException e) {
-            System.out.println(e);
-        }
-        System.out.println(massPerson);
-        return massPerson;
-    }
-
     public static void passLog(String login, String password){
         String query = "select * from \"JournalDB\".\"person\"  where login = '"+login+"' and password = '"+password+"'";
         rs = bd.conResoultSet(query);
@@ -75,13 +62,14 @@ public class person {
             System.out.println(e);
         }
     }
+
     public static void addPerson(String surname, String name,
                                  String middleName, String login,
-                                 String password, Date yersBerth,
-                                 String status) {
+                                 String password, Date yersBerth) {
+        int status = 1;
         if (surname != null && name != null && middleName != null &&
                 login != null && password != null && yersBerth !=null &&
-                status != null) {
+                status >= 0) {
             System.out.println("2");
             String qwery = "select * " +
                     "from \"JournalDB\".\"person\" " +
@@ -94,8 +82,7 @@ public class person {
                 }
                 System.out.println("4");
                 if (!rs.wasNull()) {
-                    qwery = "select * " +
-                            "from \"JournalDB\".\"person\"";
+                    qwery = "select * from \"JournalDB\".\"person\"";
                     bd.executeUppMethod(qwery);
                     int last = 0;
                     while (rs.next()) {
@@ -103,19 +90,9 @@ public class person {
                         System.out.println("5");
                     }
 
-                    qwery = "select * " +
-                            "from \"JournalDB\".\"status\"";
-                    bd.executeUppMethod(qwery);
-                    int statusInt = 0;
-                    while (rs.next()) {
-                        if (status.equals(Integer.toString(rs.getInt(1))))
-                        statusInt = rs.getInt(1);
-                        System.out.println("6");
-                    }
-
                     qwery = "insert into \"JournalDB\".\"person\" values " +
                             "("+last+1+",'"+surname+"','"+name+"','"+middleName+"'," +
-                            "'"+yersBerth+"','"+login+"','"+password+"',"+statusInt+")";
+                            "'"+yersBerth+"','"+login+"','"+password+"',"+status+")";
                     bd.executeUppMethod(qwery);
                     System.out.println("7");
                 } else {

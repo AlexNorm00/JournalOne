@@ -68,7 +68,7 @@ public class MainController {
 
     @GetMapping("/Person")
     public String seyInPersonPost(Model model){
-        model.addAttribute("options",setting.allPosition("status"));
+        model.addAttribute("options",setting.allPositionOnPersonView("status"));
         return "PersonView";
     }
 
@@ -79,8 +79,10 @@ public class MainController {
                               @RequestParam("login") String loginPers,
                               @RequestParam("psw") String passPerson,
                               @RequestParam("dataYers") Date dataYers,
-                              @RequestParam("status") String status){
-        person.addPerson(surname,name,middlename,loginPers,passPerson,dataYers,status.toString());
+                              @RequestParam("options") String status){
+        System.out.println("1");
+        person.addPerson(surname,name,middlename,loginPers,passPerson,dataYers);
+        System.out.println("2");
         return "redirect:/Person";}
 
 
