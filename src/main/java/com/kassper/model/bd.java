@@ -34,7 +34,6 @@ public class bd {
 
     public static void passLog(String qwerys){
         bd.qwerys = qwerys;
-
         con();
         try {
             while (rs.next())
@@ -61,8 +60,6 @@ public class bd {
                 stm.executeUpdate(qwerys);
             }
             else rs = stm.executeQuery(qwerys);
-
-            con.close();
         } catch (SQLException e) {
             System.out.println(e +"\n"+e.getSQLState()+"\n"+e.getErrorCode());
         }
@@ -70,8 +67,8 @@ public class bd {
 
     public static void allClosed(){
         try {
-            rs.close();
-            stm.close();
+            rs = null;
+            stm = null;
             con.close();
         }
         catch (SQLException e) {
@@ -87,6 +84,7 @@ public class bd {
 
 
     public static ResultSet conResoultSet(String qwerys) {
+        typeqwery = 0;
         bd.qwerys = qwerys;
         con();
         return rs;

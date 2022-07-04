@@ -23,6 +23,8 @@ public class MainController {
         model.addAttribute("textic", text);
         return "Password";}
 
+    @GetMapping("/Start")
+    public String seyInStartGet(){return "StartPosition";}
 
     @PostMapping("/Start")
     public String seyInStartPost(@RequestParam("uname") String login, @RequestParam("psw") String password, Model model) {
@@ -32,8 +34,7 @@ public class MainController {
             if(person.getLogin() !=null || person.getPassword()!=null){
                 MainController.id = person.getId();
                 MainController.status = person.getStatus();
-                model.addAttribute("my", FIO);
-                return "StartPosition";
+                return "redirect:/Start";
             }
             else {
                 text = "Wrong login or password. Try again.               ";
@@ -48,25 +49,28 @@ public class MainController {
         return "Password";
     }
 
-    @GetMapping("/Person")
-    public String seyInPersonPost(Model model){
-        model.addAttribute("options",setting.allPosition("status"));
-        return "PersonView";
-    }
-
     @GetMapping("/Setting")
     public String seyInSettingPost(Model model){
         model.addAttribute("m",setting.allPosition("predmet"));
         model.addAttribute("n", setting.allPosition("status"));
         return "SettingsView";}
 
-/*    @GetMapping("/Setting")
-    public String seyInSettingGet(Model model){
+    @PostMapping("/Setting")
+    public String seyAddSettingStatus (@RequestParam ("ID") String id, @RequestParam ("Name") String name, @RequestParam ("but") String button, Model model){
+        if ( button.equals("add1")) setting.addSeiing(id, name, "predmet");
+        if ( button.equals("add2")) setting.addSeiing(id, name, "status");
+        if ( button.equals("dell1")) setting.dellSetting(id, name, "predmet");
+        if ( button.equals("dell2")) setting.dellSetting(id, name, "status");
         model.addAttribute("m",setting.allPosition("predmet"));
         model.addAttribute("n", setting.allPosition("status"));
-        return "SettingsView";}*/
+        return "redirect:/Setting";
+    }
 
-
+    @GetMapping("/Person")
+    public String seyInPersonPost(Model model){
+        model.addAttribute("options",setting.allPosition("status"));
+        return "PersonView";
+    }
 
     @PostMapping("/Person")
     public String seyInPerson(@RequestParam("surname") String surname,
@@ -77,26 +81,8 @@ public class MainController {
                               @RequestParam("dataYers") Date dataYers,
                               @RequestParam("status") String status){
         person.addPerson(surname,name,middlename,loginPers,passPerson,dataYers,status.toString());
-        return "Start";}
+        return "redirect:/Person";}
 
 
-/*    // @GetMapping("/Setting")
-    @PostMapping(value = "/Setting)
-    public String seyAddSettingClass (@RequestParam ("classID") String idClass, @RequestParam ("className") String nameClass){;
-        setting.addSeiing(idClass, nameClass, "predmet");
-        return "SettingsView";
-    }*/
-
-   // @GetMapping("/Setting")
-    @PostMapping(value = "/Setting")
-    public String seyAddSettingStatus (@RequestParam ("ID") String id, @RequestParam ("Name") String name, @RequestParam ("but") String button){
-        String settingParsms = button == "add2"? "status" : button == "add1" ? "predmet " : null;
-        if (settingParsms==null) {
-            settingParsms = button=="dell2" ? "status" : "predmet";
-            setting.dellSetting(id,name,settingParsms);
-        }
-        else setting.addSeiing(id, name, settingParsms);
-        return "SettingsView";
-    }
 
 }
