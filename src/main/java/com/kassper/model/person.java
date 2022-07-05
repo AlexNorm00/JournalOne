@@ -19,50 +19,19 @@ public class person {
     private static ResultSet rs;
 
     //Setters
-    public static void setLogin(String login) {
-        person.login = login;
-    }
-
-    public static void setPassword(String password) {
-        person.password = password;
-    }
+    public static void setLogin(String login) {person.login = login;}
+    public static void setPassword(String password) {person.password = password;}
 
     //Getters
-    public static int getId() {
-        return id;
-    }
-
-    public static String getSurname() {
-        return surname;
-    }
-
-    public static String getName() {
-        return name;
-    }
-
-    public static String getMiddleName() {
-        return middleName;
-    }
-
-    public static String getYearOfBerth() {
-        return yearOfBerth;
-    }
-
-    public static String getLogin() {
-        return login;
-    }
-
-    public static String getPassword() {
-        return password;
-    }
-
-    public static int getStatus() {
-        return status;
-    }
-
-    public static int getNomGroup() {
-        return nomGroup;
-    }
+    public static int getId() {return id;}
+    public static String getSurname() {return surname;}
+    public static String getName() {return name;}
+    public static String getMiddleName() {return middleName;}
+    public static String getYearOfBerth() {return yearOfBerth;}
+    public static String getLogin() {return login;}
+    public static String getPassword() {return password;}
+    public static int getStatus() {return status;}
+    public static int getNomGroup() {return nomGroup;}
 
     private static void allPersonOne() {
         try {
@@ -106,15 +75,11 @@ public class person {
             while (rs.next()) {
                 logs = rs.getString(1);
             }
-            System.out.println("+++++");
             if (logs==null) {
-                System.out.println("+++++");
                 qwery = "select * from \"JournalDB\".\"person\"";
                 rs = bd.conResoultSet(qwery);
-                System.out.println("+++++");
                 int lastID = 0;
                 while (rs.next()) {
-                    System.out.println("+++++");
                     allPersonOne();
                     lastID++;
                 }
@@ -127,23 +92,5 @@ public class person {
             System.out.println(e);
         }
     }
-
-    public static String allPersonOfJounal(int id) {
-        String retStr = "Non";
-        if (id != 0) {
-            String qwery = "\"select * from \"JournalDB\".\"Person\" where id_person = " + id;
-            rs = bd.conResoultSet(qwery);
-            try {
-                while (rs.next()) {
-                    allPersonOne();
-                    retStr = surname + " " + name + " " + middleName;
-                }
-            } catch (SQLException e) {
-                System.out.println(e);
-            }
-        }
-        return retStr;
-    }
-
 
 }
