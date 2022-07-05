@@ -10,34 +10,67 @@ public class person {
     private static String surname;
     private static String name;
     private static String middleName;
-    private static Date yearOfBerth;
+    private static String yearOfBerth;
     private static String login = null;
     private static String password = null;
     private static int status;
     private static int nomGroup;
 
     private static ResultSet rs;
-    //Setters
-    public static void setLogin(String login) {person.login = login;}
-    public static void setPassword(String password) {person.password = password;}
-    //Getters
-    public static int getId() {return id;}
-    public static String getSurname() {return surname;}
-    public static String getName() {return name;}
-    public static String getMiddleName() {return middleName;}
-    public static Date getYearOfBerth() {return yearOfBerth;}
-    public static String getLogin() {return login;}
-    public static String getPassword() {return password;}
-    public static int getStatus() {return status;}
-    public static int getNomGroup() {return nomGroup;}
 
-    private static void allPersonOne(){
+    //Setters
+    public static void setLogin(String login) {
+        person.login = login;
+    }
+
+    public static void setPassword(String password) {
+        person.password = password;
+    }
+
+    //Getters
+    public static int getId() {
+        return id;
+    }
+
+    public static String getSurname() {
+        return surname;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static String getMiddleName() {
+        return middleName;
+    }
+
+    public static String getYearOfBerth() {
+        return yearOfBerth;
+    }
+
+    public static String getLogin() {
+        return login;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static int getStatus() {
+        return status;
+    }
+
+    public static int getNomGroup() {
+        return nomGroup;
+    }
+
+    private static void allPersonOne() {
         try {
             person.id = rs.getInt(1);
             person.surname = rs.getString(2);
             person.name = rs.getString(3);
             person.middleName = rs.getString(4);
-            person.yearOfBerth = rs.getDate(5);
+            person.yearOfBerth = rs.getString(5);
             person.login = rs.getString(6);
             person.password = rs.getString(7);
             person.status = rs.getInt(8);
@@ -47,17 +80,15 @@ public class person {
         }
     }
 
-    public static void passLog(String login, String password){
-        String query = "select * from \"JournalDB\".\"person\"  where login = '"+login+"' and password = '"+password+"'";
+    public static void passLog(String login, String password) {
+        String query = "select * from \"JournalDB\".\"person\"  where login = '" + login + "' and password = '" + password + "'";
         rs = bd.conResoultSet(query);
         try {
-            while (rs.next())
-            {
+            while (rs.next()) {
                 allPersonOne();
-                if (!person.login.equals(login) && !person.password.equals(password))
-                {
-                    person.login=null;
-                    person.password=null;
+                if (!person.login.equals(login) && !person.password.equals(password)) {
+                    person.login = null;
+                    person.password = null;
                 }
             }
             rs.close();
@@ -66,60 +97,48 @@ public class person {
         }
     }
 
-    public static void addPerson(String surname, String name,
-                                 String middleName, String login,
-                                 String password, Date yersBerth, String status) {
-        if (surname != null && name != null && middleName != null &&
-                login != null && password != null && yersBerth !=null &&
-                status != null) {
-            System.out.println("2");
-            String qwery = "select * " +
-                    "from \"JournalDB\".\"person\" " +
-                    "where login  = '" + login + "' and not password ='" + password + "'";
-            rs = bd.conResoultSet(qwery);
-            System.out.println("3");
-            try {
-                while (rs.next()) {
-                    allPersonOne();
-                }
-                System.out.println("4");
-                if (!rs.wasNull()) {
-                    qwery = "select * from \"JournalDB\".\"person\"";
-                    bd.executeUppMethod(qwery);
-                    int last = 0;
-                    while (rs.next()) {
-                        last = rs.getInt(1);
-                        System.out.println("5");
-                    }
-
-                    qwery = "insert into \"JournalDB\".\"person\" values " +
-                            "("+last+1+",'"+surname+"','"+name+"','"+middleName+"'," +
-                            "'"+yersBerth+"','"+login+"','"+password+"',"+status+")";
-                    bd.executeUppMethod(qwery);
-                    System.out.println("7");
-                } else {
-                    System.out.println("Запись существует");
-                }
-                rs.close();
-                rs = null;
-            } catch (SQLException e) {
-                System.out.println(e);
+    public static void addPerson(String surname, String name, String middleName, String login,
+                                 String password, String yersBerth, String status, int nomGroup) {
+        String qwery = "select login from \"JournalDB\".\"person\" where login  = '" + login + "'";
+        rs = bd.conResoultSet(qwery);
+        try {
+            String logs=null;
+            while (rs.next()) {
+                logs = rs.getString(1);
             }
+            System.out.println("+++++");
+            if (logs==null) {
+                System.out.println("+++++");
+                qwery = "select * from \"JournalDB\".\"person\"";
+                rs = bd.conResoultSet(qwery);
+                System.out.println("+++++");
+                int lastID = 0;
+                while (rs.next()) {
+                    System.out.println("+++++");
+                    allPersonOne();
+                    lastID++;
+                }
+                qwery = "insert into \"JournalDB\".\"person\" values ("+lastID+",'"+surname+"','"+name+"','"+middleName+
+                                                                    "','"+yersBerth+"','"+login+"','"+password+"',"+status+","+nomGroup+")";
+                System.out.println("+++++");
+                rs = bd.conResoultSet(qwery);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
         }
     }
 
-    public static String allPersonOfJounal (int id){
+    public static String allPersonOfJounal(int id) {
         String retStr = "Non";
-        if (id != 0){
-            String qwery = "\"select * from \"JournalDB\".\"Person\" where id_person = "+id;
+        if (id != 0) {
+            String qwery = "\"select * from \"JournalDB\".\"Person\" where id_person = " + id;
             rs = bd.conResoultSet(qwery);
             try {
                 while (rs.next()) {
                     allPersonOne();
-                    retStr = surname+" "+name+" "+middleName;
+                    retStr = surname + " " + name + " " + middleName;
                 }
-            }
-            catch (SQLException e) {
+            } catch (SQLException e) {
                 System.out.println(e);
             }
         }

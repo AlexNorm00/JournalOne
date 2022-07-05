@@ -47,7 +47,7 @@ public class setting {
             while (rs.next()) {
                 onePosition();
                 if (i>=0)
-                    if (i>3)
+                    if (i>0)
                 text += "<option value = \""+i+"\" name = \"select\">"+name+"</option>";
                 i++;
             }

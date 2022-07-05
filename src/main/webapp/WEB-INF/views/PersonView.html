@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>PersonAdd</title>
     <style type="text/css">
-
+input[type=number],
 input[type=text],
 input[type=password] {
     width: 100%;
@@ -15,9 +15,9 @@ input[type=password] {
     box-sizing: border-box;
 }
 
-select[size="1"],
+select,
 input[type=date]{
-    width: 100%;
+    width: 49%;
     padding: 12px 20px;
     margin: auto;
     display: inline-block;
@@ -50,24 +50,12 @@ button:hover {
     right:35%;
     padding: 16px;
 }
-.containerleft {
-    position: absolute;
-    top:85%;
-    right:50%;
-    padding: 16px;
-}
-.containerright {
-    position: absolute;
-    top:85%;
-    left:50%;
-    padding: 16px;
-}
+
 .containerPass {
     position: absolute;
     right:3,5%;
     left:4%;
-    top:121%;
-    wight: 100%
+    width: 100%
     padding: 16px;
 }
 /* The "Forgot password" text */
@@ -84,40 +72,84 @@ span.psw {
     }
 
 }
+.labels{
+width:100%;
+}
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
 <form method="post" action="Person">
-<div class="container">
-    <div>
-        <label><b>Surname</b></label>
-        <input type="text" placeholder="Enter surname" name="surname" required>
-        <label><b>Name</b></label>
-        <input type="text" placeholder="Enter name" name="name" required>
-        <label><b>Middle name</b></label>
-        <input type="text" placeholder="Enter middle name" name="middlename" required>
+    <div class="container">
+        <div>
+            <div>
+                <label>
+                    <b>Nom group</b>
+                </label>
+            </div>
+            <div>
+                <input type="number" placeholder="Enter surname" name="nomGroup" required>
+            </div>
+            <div>
+                <div><label>
+                    <b>Surname</b>
+                </label>
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter surname" name="surname" required>
+                </div>
+                <div>
+                    <label>
+                        <b>Name</b>
+                    </label>
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter name" name="name" required>
+                </div>
+                <div>
+                    <label>
+                        <b>Middle name</b>
+                    </label>
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter middle name" name="middlename" required>
+                </div>
+                <div>
+                    <div>
+                        <label>
+                            <b>Date birthday &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Classification</b>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <input type="date" placeholder="dd.mm.yyyy" name="dataYers" required>
+                        <select size="1" required="true" name="select">
+                            <option selected></option>
+                            <div th:utext="${options}"/>
+                        </select>
+                    </div>
+                </div>
 
-        <div class="containerPass">
-            <label><b>Login</b></label>
-            <input type="text" placeholder="Enter login/uname" name="login" required>
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-            <button type="submit">Save</button>
-        </div>
+                <div>
+                    <div><label><b>Login</b></label></div>
+                    <div><input type="text" placeholder="Enter login/uname" name="login" required></div>
+                    <div><label><b>Password</b></label></div>
+                    <div><input type="password" placeholder="Enter Password" name="psw" required></div>
+                    <div>
+                        <button type="submit">Save</button>
+                    </div>
+                </div>
+            </div>
 
-        <div class="containerleft">
-        <label><b>Date berthday</b></label>
-        <input type="date" placeholder="dd.mm.yyyy" name="dataYers" required>
         </div>
-        <div class="containerright">
-        <label><b>Classsification</b></label>
-        <select size="1"  required="true"  name="select">
-            <option selected>Choose a classification</option>
-            <div th:utext = "${options}"/>
-        </select>
-        </div>
-    </div>
-</div>
 </form>
 </body>
 </html>

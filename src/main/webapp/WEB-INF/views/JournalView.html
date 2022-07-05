@@ -16,6 +16,14 @@ input[type=text] {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+input[type=date]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: auto;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
 
 .label{
 width: 100%;
@@ -98,12 +106,31 @@ height:100%;
 <body>
 <form method="post" action="JournalList">
     <div class="allForms">
-    <div class="containerLeft" >
+        <div class="tableJournal">
+            <label><h3 align="center" th:text = "${dataJournalAndPredmet}"></h3></label>
+            <input type="text" placeholder="Enter lesson topic" name="lessonTopic" >
+            <table bgcolor="#CCCCFF" border="1px">
+                <tbody>
+                <tr bgcolor="#C2A3E0" width="1000px">
+                    <th width="70px">Id</th>
+                    <th width="700px">Student</th>
+                    <th width="100px">Attendense</th>
+                    <th width="100px">Assessment</th>
+                </tr>
+                    <div th:utext = "${n}"></div>
+                </tbody>
+            </table>
+        </div>
+        <div class="containerLeft" >
+
         <div><label>No group</label></div>
         <div><input type="number" placeholder="No" name="NomGroup" required></div>
+        <div><label>Date</label></div>
+        <input type="date" placeholder="dd.mm.yyyy" name="dateLanguage" >
         <div><label>Subject</label></div>
         <div>
             <select size="1"  required="true" name="select">
+                <option selected></option>
                 <div th:utext = "${options}"></div>
             </select>
         </div>
@@ -114,27 +141,7 @@ height:100%;
         </div>
     </div>
 
-    <div class="tableJournal">
-        <label><h3 align="center" th:text = "${dataJournalAndPredmet}"></h3></label>
-        <input type="text" placeholder="Enter lesson topic" name="lessonTopic" >
-        <table bgcolor="#CCCCFF" border="1px">
-            <tbody>
-            <tr bgcolor="#C2A3E0" width="1000px">
-                <th width="70px">Id</th>
-                <th width="700px">Student</th>
-                <th width="100px">Attendense</th>
-                <th width="100px">Assessment</th>
-            </tr>
-            <tr>
-                <th>a</th>
-                <th>a</th>
-                <th>a</th>
-                <th>a</th>
-            </tr>
-            <div  th:utext = "${JournalList}"></div>
-            </tbody>
-        </table>
-    </div>
+
     </div>
 </form>
 </body>

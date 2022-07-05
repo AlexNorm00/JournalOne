@@ -79,10 +79,10 @@ public class MainController {
                               @RequestParam("middlename") String middleName,
                               @RequestParam("login") String loginPers,
                               @RequestParam("psw") String passPerson,
-                              @RequestParam("dataYers") Date dataYers,
-                              @RequestParam("select") String status){
-        System.out.println("1");
-        person.addPerson(surname,name,middleName,loginPers,passPerson,dataYers,status);
+                              @RequestParam("dataYers") String dataYers,
+                              @RequestParam("select") String status,
+                              @RequestParam("nomGroup") int nomGroup){
+        person.addPerson(surname,name,middleName,loginPers,passPerson,dataYers,status,nomGroup);
         System.out.println("2");
         return "redirect:/Person";
     }
@@ -93,9 +93,8 @@ public class MainController {
     public String seyJournalListGet (Model model){
         dataJAdnpP += group != null ? group : "";
         model.addAttribute("dataJournalAndPredmet",dataJAdnpP);
-        group = null;
         model.addAttribute("options", setting.allPositionOnPersonView("predmet"));
-        //model.addAttribute("JournalList","" /*Journal.allPositionJournalView(NomGroup)*/);
+        model.addAttribute("n", Journal.allPositionJournalView(group));
         return "JournalView";
     }
 
@@ -105,8 +104,7 @@ public class MainController {
                                      @RequestParam("but") String allButton,
                                      /*@RequestParam("select") String select,*/ Model model){
         if (allButton.equals("searchButton")){
-            System.out.println("if");
-        model.addAttribute("JournalList", Journal.allPositionJournalView(NomGroup));
+        model.addAttribute("n", Journal.allPositionJournalView(NomGroup));
        // model.addAttribute("dataJournalAndPredmet",dataJAdnpP);
         group = NomGroup;
         }

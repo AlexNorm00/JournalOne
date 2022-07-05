@@ -10,7 +10,7 @@ public class Journal {
     private static int id_person;
     private static int id_predmet;
     private static boolean attendense;
-    private static byte assessment;
+    private static int assessment;
     private static String lesonTopic;
 
     private static ResultSet rs;
@@ -23,7 +23,7 @@ public class Journal {
             id_person = rs.getInt(3);
             id_predmet = rs.getInt(4);
             attendense = rs.getBoolean(5);
-            assessment = rs.getByte(6);
+            assessment = rs.getInt(6);
             lesonTopic = rs.getString(7);
         }
         catch (SQLException e)
@@ -34,7 +34,7 @@ public class Journal {
 
 
     public static String allPositionJournalView (String nomGroup){
-        String text="Log entries are missing";
+        String text="";
         int idPerson = -1;
         String query = "select * from \"JournalDB\".\"person\" where \"nomGroup\" = "+nomGroup;
         rs = bd.conResoultSet(query);
