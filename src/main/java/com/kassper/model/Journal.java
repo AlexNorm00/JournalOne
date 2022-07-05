@@ -14,6 +14,7 @@ public class Journal {
     private static String lesonTopic;
 
     private static ResultSet rs;
+    private static ResultSet rs1;
 
     private static void allJournalOne (){
         try {
@@ -32,26 +33,33 @@ public class Journal {
     }
 
 
-    public static String allPositionJournalView (String nomGroup, String subject){
-        String query = "select * from \"JournalDB\".\"Journal\" where id_predmet = "+subject+"";
+    public static String allPositionJournalView (String nomGroup){
+        String text="Log entries are missing";
+        int idPerson = -1;
+        String query = "select * from \"JournalDB\".\"person\" where \"nomGroup\" = "+nomGroup;
         rs = bd.conResoultSet(query);
-        String text="";
+        System.out.println("1");
         try {
-            int i=0;
-            while (rs.next()) {
+            while (rs.next()){
                 allJournalOne();
-                if (i>=0)
+                query = "select * from \"JournalDB\".\"Journal\" where id_person = "+rs.getInt(1)+"";
+                rs1 = bd.conResoultSet(query);
+                System.out.print("2 ");
+                int i=0;
+                while (rs1.next()) {
+                    System.out.println("3 ");
                     text += "<tr>" +
-                            "<th><a>"+id_journal+"<a/></th>" +
-                            "<th><a>"+person.allPersonOfJounal(id_person)+"<a/></th>" +
-                            "<th><a>"+attendense+"<a/></th></tr>"+
-                            "<th><a>"+assessment+"<a/></th>";
-                i++;
+                            "<th>"+id_journal+"</th>" +
+                            "<th>"+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)+"</th>" +
+                            "<th>"+attendense+"</th>"+
+                            "<th>"+assessment+"</th>" +
+                            "</tr>";
+                }
             }
         }
         catch (SQLException e){
             System.out.println(e);
         }
-        return text;
+    return text;
     }
 }

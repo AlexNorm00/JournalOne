@@ -27,7 +27,9 @@ public class setting {
         try {
             while (rs.next()) {
                 onePosition();
-                text += "<tr><th><a>"+id+"<a/></th><th><a>"+name+"<a/></th></tr>";
+                text += "<tr>" +
+                        "<th>"+id+"</th><th>"+name+"</th>" +
+                        "</tr>";
             }
         }
         catch (SQLException e){

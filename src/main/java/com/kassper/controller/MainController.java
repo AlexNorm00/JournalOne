@@ -87,20 +87,29 @@ public class MainController {
         return "redirect:/Person";
     }
 
+    private static String group = null;
+    private static String dataJAdnpP = "Journal list for __.__.____. Group - ";
     @GetMapping("/JournalList")
     public String seyJournalListGet (Model model){
-        String dataJAdnpP = "Journal list for __.__.____. Group - ______;";
+        dataJAdnpP += group != null ? group : "";
         model.addAttribute("dataJournalAndPredmet",dataJAdnpP);
+        group = null;
         model.addAttribute("options", setting.allPositionOnPersonView("predmet"));
+        //model.addAttribute("JournalList","" /*Journal.allPositionJournalView(NomGroup)*/);
         return "JournalView";
     }
 
     @PostMapping("/JournalList")
     public String seyJournalListPost(@RequestParam("NomGroup") String NomGroup,
-                                     @RequestParam("lessonTopic") Date dataYers,
+                                     /*@RequestParam("lessonTopic") Date dataYers,*/
                                      @RequestParam("but") String allButton,
-                                     @RequestParam("select") String select, Model model){
-        model.addAttribute("positionJournal", Journal.allPositionJournalView(NomGroup,select));
-        return "redict:/JournalList";
+                                     /*@RequestParam("select") String select,*/ Model model){
+        if (allButton.equals("searchButton")){
+            System.out.println("if");
+        model.addAttribute("JournalList", Journal.allPositionJournalView(NomGroup));
+       // model.addAttribute("dataJournalAndPredmet",dataJAdnpP);
+        group = NomGroup;
+        }
+        return "redirect:/JournalList";
     }
 }

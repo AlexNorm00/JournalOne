@@ -29,7 +29,7 @@ box-sizing: border-box;
 .tableJournal{
 position: absolute;
     top:10px;
-    left:340px;
+    left:400px;
     padding: 16px;
 }
 
@@ -90,8 +90,8 @@ span.psw {
     }
 
 }
-.table{
-position: absolute;
+table{
+height:100%;
 }
     </style>
 </head>
@@ -104,7 +104,7 @@ position: absolute;
         <div><label>Subject</label></div>
         <div>
             <select size="1"  required="true" name="select">
-                <div th:utext = "${options}"/>
+                <div th:utext = "${options}"></div>
             </select>
         </div>
         <div class="buttonLeft">
@@ -113,18 +113,25 @@ position: absolute;
             <button type="submit" name="but" value="сloseLesson">Close Lesson</button>
         </div>
     </div>
+
     <div class="tableJournal">
         <label><h3 align="center" th:text = "${dataJournalAndPredmet}"></h3></label>
         <input type="text" placeholder="Enter lesson topic" name="lessonTopic" >
-        <table bgcolor="#CCCCFF" align="left" border="1px">
+        <table bgcolor="#CCCCFF" border="1px">
             <tbody>
-            <tr bgcolor="#C2A3E0" width="700px">
+            <tr bgcolor="#C2A3E0" width="1000px">
                 <th width="70px">Id</th>
-                <th width="400px">Student</th>
+                <th width="700px">Student</th>
                 <th width="100px">Attendense</th>
                 <th width="100px">Assessment</th>
             </tr>
-            <div  th:utext = "${positionJournal}"></div>
+            <tr>
+                <th>a</th>
+                <th>a</th>
+                <th>a</th>
+                <th>a</th>
+            </tr>
+            <div  th:utext = "${JournalList}"></div>
             </tbody>
         </table>
     </div>
