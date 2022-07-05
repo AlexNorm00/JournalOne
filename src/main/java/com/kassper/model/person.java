@@ -14,6 +14,7 @@ public class person {
     private static String login = null;
     private static String password = null;
     private static int status;
+    private static int nomGroup;
 
     private static ResultSet rs;
     //Setters
@@ -28,6 +29,7 @@ public class person {
     public static String getLogin() {return login;}
     public static String getPassword() {return password;}
     public static int getStatus() {return status;}
+    public static int getNomGroup() {return nomGroup;}
 
     private static void allPersonOne(){
         try {
@@ -39,6 +41,7 @@ public class person {
             person.login = rs.getString(6);
             person.password = rs.getString(7);
             person.status = rs.getInt(8);
+            person.nomGroup = rs.getInt(9);
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -65,11 +68,10 @@ public class person {
 
     public static void addPerson(String surname, String name,
                                  String middleName, String login,
-                                 String password, Date yersBerth) {
-        int status = 1;
+                                 String password, Date yersBerth, String status) {
         if (surname != null && name != null && middleName != null &&
                 login != null && password != null && yersBerth !=null &&
-                status >= 0) {
+                status != null) {
             System.out.println("2");
             String qwery = "select * " +
                     "from \"JournalDB\".\"person\" " +
@@ -105,4 +107,24 @@ public class person {
             }
         }
     }
+
+    public static String allPersonOfJounal (int id){
+        String retStr = "Non";
+        if (id != 0){
+            String qwery = "\"select * from \"JournalDB\".\"Person\" where id_person = "+id;
+            rs = bd.conResoultSet(qwery);
+            try {
+                while (rs.next()) {
+                    allPersonOne();
+                    retStr = surname+" "+name+" "+middleName;
+                }
+            }
+            catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        return retStr;
+    }
+
+
 }

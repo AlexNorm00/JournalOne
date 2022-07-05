@@ -44,7 +44,9 @@ public class setting {
             int i=0;
             while (rs.next()) {
                 onePosition();
-                text += "<option value = \""+i+"\" name=\"options\">"+name+"</option>";
+                if (i>=0)
+                    if (i>3)
+                text += "<option value = \""+i+"\" name = \"select\">"+name+"</option>";
                 i++;
             }
         }
@@ -76,7 +78,7 @@ public class setting {
     }
 
     public static void dellSetting (String id, String name, String identity){
-        if (id !=null && name !=null){
+        if (id !=null && name !=null && !id.equals("0")){
             String qwery = "Delete from \"JournalDB\".\""+identity+"\" where id_"+identity+"="+id+" and name"+identity+"='"+name+"'";
             bd.executeUppMethod(qwery);
         }

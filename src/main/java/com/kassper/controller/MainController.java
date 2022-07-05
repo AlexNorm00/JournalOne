@@ -1,5 +1,6 @@
 package com.kassper.controller;
 
+import com.kassper.model.Journal;
 import com.kassper.model.bd;
 import com.kassper.model.person;
 import com.kassper.model.setting;
@@ -75,25 +76,31 @@ public class MainController {
     @PostMapping("/Person")
     public String seyInPerson(@RequestParam("surname") String surname,
                               @RequestParam("name") String name,
-                              @RequestParam("middlename") String middlename,
+                              @RequestParam("middlename") String middleName,
                               @RequestParam("login") String loginPers,
                               @RequestParam("psw") String passPerson,
                               @RequestParam("dataYers") Date dataYers,
-                              @RequestParam("options") String status){
+                              @RequestParam("select") String status){
         System.out.println("1");
-        person.addPerson(surname,name,middlename,loginPers,passPerson,dataYers);
+        person.addPerson(surname,name,middleName,loginPers,passPerson,dataYers,status);
         System.out.println("2");
         return "redirect:/Person";
     }
 
     @GetMapping("/JournalList")
     public String seyJournalListGet (Model model){
-        model.addAttribute("dataJournalAndPredmet","Journal list for __.__.____. Group - ______;");
+        String dataJAdnpP = "Journal list for __.__.____. Group - ______;";
+        model.addAttribute("dataJournalAndPredmet",dataJAdnpP);
+        model.addAttribute("options", setting.allPositionOnPersonView("predmet"));
         return "JournalView";
     }
 
     @PostMapping("/JournalList")
-    public String seyJournalListPost(){
+    public String seyJournalListPost(@RequestParam("NomGroup") String NomGroup,
+                                     @RequestParam("lessonTopic") Date dataYers,
+                                     @RequestParam("but") String allButton,
+                                     @RequestParam("select") String select, Model model){
+        model.addAttribute("positionJournal", Journal.allPositionJournalView(NomGroup,select));
         return "redict:/JournalList";
     }
 }

@@ -89,7 +89,5 @@ public class bd {
         con();
         return rs;
     }
-
-
 }
 

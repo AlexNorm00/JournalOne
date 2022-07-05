@@ -100,12 +100,12 @@ position: absolute;
     <div class="allForms">
     <div class="containerLeft" >
         <div><label>No group</label></div>
-        <div><input type="number" placeholder="No" name="NomGroup" maxlength =""></div>
+        <div><input type="number" placeholder="No" name="NomGroup" required></div>
         <div><label>Subject</label></div>
         <div>
-            <select size="1"  required="true">
-            <div th:utext = "${options}"/>
-        </select>
+            <select size="1"  required="true" name="select">
+                <div th:utext = "${options}"/>
+            </select>
         </div>
         <div class="buttonLeft">
             <button type="submit" name="but" value="searchButton">Search</button>
@@ -115,11 +115,12 @@ position: absolute;
     </div>
     <div class="tableJournal">
         <label><h3 align="center" th:text = "${dataJournalAndPredmet}"></h3></label>
-        <input type="text" placeholder="Enter lesson topic" name="lessonTopic" maxlength ="">
+        <input type="text" placeholder="Enter lesson topic" name="lessonTopic" >
         <table bgcolor="#CCCCFF" align="left" border="1px">
             <tbody>
             <tr bgcolor="#C2A3E0" width="700px">
-                <th width="479px">Student</th>
+                <th width="70px">Id</th>
+                <th width="400px">Student</th>
                 <th width="100px">Attendense</th>
                 <th width="100px">Assessment</th>
             </tr>
