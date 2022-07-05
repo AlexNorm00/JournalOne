@@ -83,8 +83,17 @@ public class MainController {
         System.out.println("1");
         person.addPerson(surname,name,middlename,loginPers,passPerson,dataYers);
         System.out.println("2");
-        return "redirect:/Person";}
+        return "redirect:/Person";
+    }
 
+    @GetMapping("/JournalList")
+    public String seyJournalListGet (Model model){
+        model.addAttribute("dataJournalAndPredmet","Journal list for __.__.____. Group - ______;");
+        return "JournalView";
+    }
 
-
+    @PostMapping("/JournalList")
+    public String seyJournalListPost(){
+        return "redict:/JournalList";
+    }
 }

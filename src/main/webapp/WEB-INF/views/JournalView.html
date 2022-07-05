@@ -1,10 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th = "http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Setting</title>
+    <style type="text/css">
+        /* Bordered form */
+
+/* Full-width inputs */
+input[type=number],
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: auto;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.label{
+width: 100%;
+padding: 12px 20px;
+margin: auto;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
+
+.tableJournal{
+position: absolute;
+    top:10px;
+    left:340px;
+    padding: 16px;
+}
+
+button {
+    background-color: #663399;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+
+.containerLeft {
+    position: absolute;
+    width:300px;
+    background: #CCCCFF;
+    height:100%;
+    padding: 16px;
+}
+
+body{
+overflow: scroll;
+height:100%;
+}
+
+
+.buttonLeft{
+    position: absolute;
+    width: 300px;
+    top: 300px;
+
+}
+
+select{
+    position: absolute;
+    width: 300px;
+    padding: 16px;
+}
+
+
+/* The "Forgot password" text */
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+
+}
+.table{
+position: absolute;
+}
+    </style>
 </head>
 <body>
-
+<form method="post" action="JournalList">
+    <div class="allForms">
+    <div class="containerLeft" >
+        <div><label>No group</label></div>
+        <div><input type="number" placeholder="No" name="NomGroup" maxlength =""></div>
+        <div><label>Subject</label></div>
+        <div>
+            <select size="1"  required="true">
+            <div th:utext = "${options}"/>
+        </select>
+        </div>
+        <div class="buttonLeft">
+            <button type="submit" name="but" value="searchButton">Search</button>
+            <button type="submit" name="but" value="сreateLesson">Create Lesson</button>
+            <button type="submit" name="but" value="сloseLesson">Close Lesson</button>
+        </div>
+    </div>
+    <div class="tableJournal">
+        <label><h3 align="center" th:text = "${dataJournalAndPredmet}"></h3></label>
+        <input type="text" placeholder="Enter lesson topic" name="lessonTopic" maxlength ="">
+        <table bgcolor="#CCCCFF" align="left" border="1px">
+            <tbody>
+            <tr bgcolor="#C2A3E0" width="700px">
+                <th width="479px">Student</th>
+                <th width="100px">Attendense</th>
+                <th width="100px">Assessment</th>
+            </tr>
+            <div  th:utext = "${positionJournal}"></div>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</form>
 </body>
 </html>
