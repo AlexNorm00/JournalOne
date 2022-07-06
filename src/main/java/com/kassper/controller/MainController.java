@@ -6,7 +6,6 @@ import com.kassper.model.person;
 import com.kassper.model.setting;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -87,9 +86,8 @@ public class MainController {
 
 
     private static int group;
-
     private static Date date = new Date();
-    private static final String dateFormat1 = new SimpleDateFormat("dd.MM.yyyy").format(date);
+    private static String dateFormat1 = new SimpleDateFormat("dd.MM.yyyy").format(date);
     private static final String dateFormat2 = new SimpleDateFormat("yyyy-MM-dd").format(date);
 
     @GetMapping("/JournalList")
@@ -102,26 +100,16 @@ public class MainController {
     }
 
     @PostMapping("/JournalList")
-    public String seyJournalListPost(@RequestParam(value = "NomGroup", required = false) int NomGroup,
-                                     /*@RequestParam(value = "dateLanguage", required = false) String dataYers,*/
-                                     @RequestParam("but") String allButton,
-                                     /*@RequestParam("select") String select,*/ Model model){
-        if (allButton.equals("searchButton")){
-            try {
-                if (NomGroup > 0 ) System.out.println(NomGroup);
-            }
-            catch (Exception e)
-            {
-                System.out.println(e);
-            }
-
-
-                group = NomGroup;
-           /* if (!dataYers.equals("")) System.out.println(dataYers);
-            else System.out.println("ssss");*/
-       // model.addAttribute("dataJournalAndPredmet",dataJAdnpP);
-
+    public String seyJournalListPost(@RequestParam(value = "dateLanguage", required = false) String dataYers,
+                                     @RequestParam(value = "NomGroup", required = false) int NomGroup,
+                                     @RequestParam(value = "but", required = false) String allButton,
+                                     @RequestParam("select") String select, Model model){
+        if (allButton.equals("searchButton")) {
+            if (NomGroup > 0) group = NomGroup;
         }
+        // Вижу, что кастыль, но по другому не нашёл как
+        dateFormat1 = String.join(".",dataYers.substring(8),dataYers.substring(5,7),dataYers.substring(0,4));
+
         return "redirect:/JournalList";
     }
 }

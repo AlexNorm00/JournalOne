@@ -125,9 +125,9 @@ height:100%;
         <div class="containerLeft">
 
             <div><label>No group</label></div>
-            <div><input type="number" placeholder="0" name="NomGroup" min="0" max="1000000"></div>
+            <div><input type="number" placeholder="0" name="NomGroup" min="0" max="1000000" required></div>
             <div><label>Date</label></div>
-            <input type="date" name="dateLanguage" th:value="${date}" min="1900-01-01" max="2999-01-01">
+            <input type="date" name="dateLanguage" th:value="${date}"  placeholder="dd-mm-yyyy" min="1900-01-01" max="2999-01-01">
             <div><label>Subject</label></div>
             <div>
                 <select size="1" name="select">
@@ -136,7 +136,7 @@ height:100%;
                 </select>
             </div>
             <div class="buttonLeft">
-                <button type="submit" name="but" value="searchButton" >Search</button>
+                <button name="but" value="searchButton">Search</button>
                 <button type="submit" name="but" value="сreateLesson">Create Lesson</button>
                 <button type="submit" name="but" value="сloseLesson">Close Lesson</button>
             </div>
