@@ -88,16 +88,16 @@ public class MainController {
 
     private static int group;
 
-    private static final Date date = new Date();
-    private static final SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd.MM.yyyy");
-    private static final SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+    private static Date date = new Date();
+    private static final String dateFormat1 = new SimpleDateFormat("dd.MM.yyyy").format(date);
+    private static final String dateFormat2 = new SimpleDateFormat("yyyy-MM-dd").format(date);
 
     @GetMapping("/JournalList")
     public String seyJournalListGet (Model model){
-        model.addAttribute("dataJournalAndPredmet","Journal list for "+dateFormat1.format(date)+". Group - "+group);
+        model.addAttribute("dataJournalAndPredmet","Journal list for "+dateFormat1+". Group - "+group);
         model.addAttribute("options", setting.allPositionOnPersonView("predmet"));
         model.addAttribute("n", Journal.allPositionJournalView(group));
-        model.addAttribute("date",dateFormat2.format(date));
+        model.addAttribute("date",dateFormat2);
         return "JournalView";
     }
 
