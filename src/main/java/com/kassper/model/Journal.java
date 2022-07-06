@@ -33,7 +33,7 @@ public class Journal {
     }
 
 
-    public static String allPositionJournalView (int nomGroup){
+    public static String allPositionJournalView (int nomGroup, String dateYers, String predmet){
         String text="";
         int idPerson = -1;
         String query = "select * from \"JournalDB\".\"person\" where \"nomGroup\" = "+nomGroup;
@@ -41,7 +41,9 @@ public class Journal {
         try {
             while (rs.next()){
                 allJournalOne();
-                query = "select * from \"JournalDB\".\"Journal\" where id_person = "+rs.getInt(1)+"";
+                query = "select * from \"JournalDB\".\"Journal\" " +
+                        "where id_person = "+rs.getInt(1)+" and date='"+dateYers+"'" +
+                        ""+ (!predmet.equals("all subject") ? " and id_predmet = "+predmet : "");
                 rs1 = bd.conResoultSet(query);
                 System.out.print("2 ");
                 int i=0;

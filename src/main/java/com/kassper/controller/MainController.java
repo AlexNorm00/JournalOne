@@ -87,6 +87,8 @@ public class MainController {
 
     private static int group;
     private static Date date = new Date();
+    private static String dataYers;
+    private static String predmet;
     private static String dateFormat1 = new SimpleDateFormat("dd.MM.yyyy").format(date);
     private static final String dateFormat2 = new SimpleDateFormat("yyyy-MM-dd").format(date);
 
@@ -94,7 +96,7 @@ public class MainController {
     public String seyJournalListGet (Model model){
         model.addAttribute("dataJournalAndPredmet","Journal list for "+dateFormat1+". Group - "+group);
         model.addAttribute("options", setting.allPositionOnPersonView("predmet"));
-        model.addAttribute("n", Journal.allPositionJournalView(group));
+        model.addAttribute("n", Journal.allPositionJournalView(group,dataYers,predmet));
         model.addAttribute("date",dateFormat2);
         return "JournalView";
     }
@@ -105,7 +107,11 @@ public class MainController {
                                      @RequestParam(value = "but", required = false) String allButton,
                                      @RequestParam("select") String select, Model model){
         if (allButton.equals("searchButton")) {
-            if (NomGroup > 0) group = NomGroup;
+            if (NomGroup > 0) {
+                group = NomGroup;
+                MainController.dataYers = dataYers;
+                predmet = select;
+            }
         }
         // Вижу, что кастыль, но по другому не нашёл как
         dateFormat1 = String.join(".",dataYers.substring(8),dataYers.substring(5,7),dataYers.substring(0,4));
