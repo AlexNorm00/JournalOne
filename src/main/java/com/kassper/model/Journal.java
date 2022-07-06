@@ -33,12 +33,11 @@ public class Journal {
     }
 
 
-    public static String allPositionJournalView (String nomGroup){
+    public static String allPositionJournalView (int nomGroup){
         String text="";
         int idPerson = -1;
         String query = "select * from \"JournalDB\".\"person\" where \"nomGroup\" = "+nomGroup;
         rs = bd.conResoultSet(query);
-        System.out.println("1");
         try {
             while (rs.next()){
                 allJournalOne();

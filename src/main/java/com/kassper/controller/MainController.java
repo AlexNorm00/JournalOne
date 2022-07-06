@@ -6,8 +6,11 @@ import com.kassper.model.person;
 import com.kassper.model.setting;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Controller
@@ -74,39 +77,50 @@ public class MainController {
     }
 
     @PostMapping("/Person")
-    public String seyInPerson(@RequestParam("surname") String surname,
-                              @RequestParam("name") String name,
-                              @RequestParam("middlename") String middleName,
-                              @RequestParam("login") String loginPers,
-                              @RequestParam("psw") String passPerson,
-                              @RequestParam("dataYers") String dataYers,
-                              @RequestParam("select") String status,
-                              @RequestParam("nomGroup") int nomGroup){
+    public String seyInPerson(@RequestParam("surname") String surname, @RequestParam("name") String name, @RequestParam("middlename") String middleName,
+                              @RequestParam("login") String loginPers, @RequestParam("psw") String passPerson, @RequestParam("dataYers") String dataYers,
+                              @RequestParam("select") String status, @RequestParam("nomGroup") int nomGroup){
         person.addPerson(surname,name,middleName,loginPers,passPerson,dataYers,status,nomGroup);
         System.out.println("2");
         return "redirect:/Person";
     }
 
-    private static String group = null;
-    private static String dataJAdnpP = "Journal list for __.__.____. Group - ";
+
+    private static int group;
+
+    private static final Date date = new Date();
+    private static final SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd.MM.yyyy");
+    private static final SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+
     @GetMapping("/JournalList")
     public String seyJournalListGet (Model model){
-        dataJAdnpP += group != null ? group : "";
-        model.addAttribute("dataJournalAndPredmet",dataJAdnpP);
+        model.addAttribute("dataJournalAndPredmet","Journal list for "+dateFormat1.format(date)+". Group - "+group);
         model.addAttribute("options", setting.allPositionOnPersonView("predmet"));
         model.addAttribute("n", Journal.allPositionJournalView(group));
+        model.addAttribute("date",dateFormat2.format(date));
         return "JournalView";
     }
 
     @PostMapping("/JournalList")
-    public String seyJournalListPost(@RequestParam("NomGroup") String NomGroup,
-                                     /*@RequestParam("lessonTopic") Date dataYers,*/
+    public String seyJournalListPost(@RequestParam(value = "NomGroup", required = false) int NomGroup,
+                                     /*@RequestParam(value = "dateLanguage", required = false) String dataYers,*/
                                      @RequestParam("but") String allButton,
                                      /*@RequestParam("select") String select,*/ Model model){
         if (allButton.equals("searchButton")){
-        model.addAttribute("n", Journal.allPositionJournalView(NomGroup));
+            try {
+                if (NomGroup > 0 ) System.out.println(NomGroup);
+            }
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
+
+
+                group = NomGroup;
+           /* if (!dataYers.equals("")) System.out.println(dataYers);
+            else System.out.println("ssss");*/
        // model.addAttribute("dataJournalAndPredmet",dataJAdnpP);
-        group = NomGroup;
+
         }
         return "redirect:/JournalList";
     }
