@@ -80,7 +80,6 @@ public class MainController {
                               @RequestParam("login") String loginPers, @RequestParam("psw") String passPerson, @RequestParam("dataYers") String dataYers,
                               @RequestParam("select") String status, @RequestParam("nomGroup") int nomGroup){
         person.addPerson(surname,name,middleName,loginPers,passPerson,dataYers,status,nomGroup);
-        System.out.println("2");
         return "redirect:/Person";
     }
 
@@ -105,6 +104,7 @@ public class MainController {
     public String seyJournalListPost(@RequestParam(value = "dateLanguage", required = false) String dataYers,
                                      @RequestParam(value = "NomGroup", required = false) int NomGroup,
                                      @RequestParam(value = "but", required = false) String allButton,
+                                     @RequestParam(value = "lessonTopic", required = false) String lessonTopic,
                                      @RequestParam("select") String select, Model model){
         if (allButton.equals("searchButton")) {
             if (NomGroup > 0) {
@@ -113,6 +113,13 @@ public class MainController {
                 predmet = select;
             }
         }
+        if (allButton.equals("сreateLesson")){
+            Journal.createList(group,dataYers);
+        }
+        if (allButton.equals("сloseLesson")){
+
+        }
+
         // Вижу, что кастыль, но по другому не нашёл как
         dateFormat1 = String.join(".",dataYers.substring(8),dataYers.substring(5,7),dataYers.substring(0,4));
 

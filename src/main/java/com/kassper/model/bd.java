@@ -82,12 +82,12 @@ public class bd {
         typeqwery = 1;
     }
 
-
     public static ResultSet conResoultSet(String qwerys) {
         typeqwery = 0;
         bd.qwerys = qwerys;
         con();
         return rs;
     }
+
 }
 
