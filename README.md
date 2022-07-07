@@ -35,7 +35,7 @@ http://localhost:8081
 
 ## Главное меню
 
-![Menu](https://github.com/AlexNorm00/JournalOne/blob/master/Screens/Journal.PNG)
+![Menu](https://github.com/AlexNorm00/JournalOne/blob/master/Screens/Menu.PNG)
 
 1. Кнопка "Journal" для входа в журнал
 2. Кнопка "Person" для ввода новых пользователей
