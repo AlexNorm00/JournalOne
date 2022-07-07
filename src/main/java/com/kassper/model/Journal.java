@@ -87,7 +87,7 @@ public class Journal {
 
     public static String createJournal(int nomGroup,String date,String predmet){
         String s = formTableResoultCtrate(allPersonOneGrope(nomGroup));
-        createList(nomGroup,date,predmet);
+       // createList(nomGroup,date,predmet);
         System.out.println(s);
         return s;
     }

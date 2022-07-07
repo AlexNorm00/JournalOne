@@ -1,8 +1,8 @@
-#Journal
+# Journal
 ## Введение
 This application was developed by Kel Alexey. A journal is a program with which you can keep a daily journal of students, mark their progress, and also control attendance.
 
-##Stack
+## Stack
 In this project we use:
 *Intellij idea
 *Java 8
@@ -13,7 +13,7 @@ In this project we use:
 *HTML5
 *CSS
 
-##Запустите приложение Journal через "Intellij idea" 
+## Запустите приложение Journal через "Intellij idea" 
 1. Настройте соединение с базой данных.
 ``` подключение бд
     private static final String url = "jdbc:postgresql://localhost:5432/JournalDB";
@@ -25,7 +25,8 @@ In this project we use:
 http://localhost:8081
 ```
 
-Приступаем к началу работы
+Приступаем к началу работы. Для начала нужно ввести логин и пароль
+![password] 
 
 
 
