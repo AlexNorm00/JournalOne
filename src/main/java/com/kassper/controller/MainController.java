@@ -86,41 +86,44 @@ public class MainController {
 
     private static int group;
     private static Date date = new Date();
-    private static String dataYers;
     private static String predmet;
     private static String dateFormat1 = new SimpleDateFormat("dd.MM.yyyy").format(date);
     private static final String dateFormat2 = new SimpleDateFormat("yyyy-MM-dd").format(date);
+    private static String TableViev;
 
     @GetMapping("/JournalList")
     public String seyJournalListGet (Model model){
         model.addAttribute("dataJournalAndPredmet","Journal list for "+dateFormat1+". Group - "+group);
         model.addAttribute("options", setting.allPositionOnPersonView("predmet"));
-        model.addAttribute("n", Journal.allPositionJournalView(group,dataYers,predmet));
+        model.addAttribute("n", TableViev);
         model.addAttribute("date",dateFormat2);
+
+
         return "JournalView";
     }
 
     @PostMapping("/JournalList")
     public String seyJournalListPost(@RequestParam(value = "dateLanguage", required = false) String dataYers,
                                      @RequestParam(value = "NomGroup", required = false) int NomGroup,
-                                     @RequestParam(value = "but", required = false) String allButton,
+                                     @RequestParam(value = "but") String allButton,
                                      @RequestParam(value = "lessonTopic", required = false) String lessonTopic,
                                      @RequestParam("select") String select, Model model){
+        group = NomGroup;
+        predmet = select;
         if (allButton.equals("searchButton")) {
             if (NomGroup > 0) {
-                group = NomGroup;
-                MainController.dataYers = dataYers;
-                predmet = select;
+                TableViev=Journal.allPositionJournalView(group,dataYers,predmet);
             }
         }
-        if (allButton.equals("сreateLesson")){
-            Journal.createList(group,dataYers);
+        if (allButton.equals("createLesson")){
+            if (NomGroup > 0 && !select.equals("all subject"))
+            TableViev = Journal.createJournal(group,dataYers,predmet);
         }
         if (allButton.equals("сloseLesson")){
 
         }
 
-        // Вижу, что кастыль, но по другому не нашёл как
+
         dateFormat1 = String.join(".",dataYers.substring(8),dataYers.substring(5,7),dataYers.substring(0,4));
 
         return "redirect:/JournalList";

@@ -77,12 +77,15 @@ height:100%;
 
 }
 
-select{
+.select{
     position: absolute;
     width: 300px;
     padding: 16px;
 }
 
+.select1{
+padding: 12px;
+}
 
 /* The "Forgot password" text */
 span.psw {
@@ -127,17 +130,17 @@ height:100%;
             <div><label>No group</label></div>
             <div><input type="number" placeholder="0" name="NomGroup" min="0" max="1000000" required></div>
             <div><label>Date</label></div>
-            <input type="date" name="dateLanguage" th:value="${date}"  placeholder="dd-mm-yyyy" min="1900-01-01" max="2999-01-01">
+            <input type="date" name="dateLanguage" th:value="${date}"  placeholder="yyyy-mm-dd" min="1900-01-01" max="2999-01-01">
             <div><label>Subject</label></div>
             <div>
-                <select size="1" name="select">
+                <select class="select" size="1" name="select">
                     <option selected>all subject</option>
                     <div th:utext="${options}"></div>
                 </select>
             </div>
             <div class="buttonLeft">
-                <button name="but" value="searchButton">Search</button>
-                <button type="submit" name="but" value="сreateLesson">Create Lesson</button>
+                <button type="submit" name="but" value="searchButton">Search</button>
+                <button type="submit" name="but" value="createLesson">Create Lesson</button>
                 <button type="submit" name="but" value="сloseLesson">Close Lesson</button>
             </div>
         </div>

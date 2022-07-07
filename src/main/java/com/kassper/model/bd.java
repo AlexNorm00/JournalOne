@@ -58,6 +58,7 @@ public class bd {
             stm = con.createStatement();
             if (typeqwery == 1) {
                 stm.executeUpdate(qwerys);
+                System.out.println(qwerys);
             }
             else rs = stm.executeQuery(qwerys);
         } catch (SQLException e) {
