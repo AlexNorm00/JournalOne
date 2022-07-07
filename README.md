@@ -81,6 +81,7 @@ http://localhost:8081
 4. "Search" - поиск учащихся по 3-м  полям, номер группы, дата, предмет - выводит всех учащихся группы учившихся
     в указанный день, по определённому предмету (последнее поле не обязательное);
     Во время поиска, изменения в журнале запрещены, только при начале урока.
+![SerchJournal](https://github.com/AlexNorm00/JournalOne/blob/master/Screens/SearchJournal.PNG)
 5. "Create Lesson" - кнопка для создания листа журнала, на основании группы, и предмета, с датой указанной в поле "Date"
     выводит всех учеников определённой группы, начинает урок с текущей датой.
 ![createJournal](https://github.com/AlexNorm00/JournalOne/blob/master/Screens/CreateJournalList.PNG)
